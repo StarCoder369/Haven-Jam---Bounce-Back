@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
 
     Rigidbody2D rb;
     Vector2 input;
-    Vector2 normalizedDir;
+    public Vector2 normalizedDir;
 
     void Awake()
     {
