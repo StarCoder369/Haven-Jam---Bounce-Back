@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Linq.Expressions;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,9 +29,15 @@ public class Player : MonoBehaviour
     public bool canMove = true;
     bool isDashing = false;
 
+    public float maxHealth = 100;
+    public float currentHealth = 100;
+
+    public TMP_Text healthTxt;
+
     Rigidbody2D rb;
     Vector2 input;
     public Vector2 normalizedDir;
+    public Vector3 mouseWorldPos;
 
     void Awake()
     {
@@ -80,15 +88,17 @@ public class Player : MonoBehaviour
 
         Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
 
-        Vector3 mouseWorldPosition = mainCam.ScreenToWorldPoint(new Vector3(mouseScreenPos.x, mouseScreenPos.y, mainCam.nearClipPlane));
+        mouseWorldPos = mainCam.ScreenToWorldPoint(new Vector3(mouseScreenPos.x, mouseScreenPos.y, mainCam.nearClipPlane));
 
-        mouseWorldPosition.z = 0;
+        mouseWorldPos.z = 0;
 
-        Vector2 direction = mouseWorldPosition - transform.position;
+        Vector2 direction = mouseWorldPos - transform.position;
         normalizedDir = direction.normalized;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
+
+        healthTxt.text = $"{currentHealth}/{maxHealth}";
     }
 
     void FixedUpdate()
@@ -122,4 +132,29 @@ public class Player : MonoBehaviour
         isDashing = false;
     }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Projectile"))
+        {
+            if (collision.GetComponent<Projectile>().canDmgEnemy)
+            {
+                TakeDamage(10);
+                Destroy(collision);
+            }
+        }
+    }
+
+    public void TakeDamage(float dmg)
+    {
+        currentHealth -= dmg;
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
 }

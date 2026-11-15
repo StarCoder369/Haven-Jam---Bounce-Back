@@ -32,6 +32,9 @@ public class Shield : MonoBehaviour
     public float hoverSpin = 1500f;
     public float returnSpin = 1080f;
 
+    public float knockback = 5f;
+    public float dmg = 1f;
+
     public ThrowState State { get; set; }
 
     Vector2 direction = Vector2.right;
@@ -111,7 +114,7 @@ public class Shield : MonoBehaviour
             throwDirection = direction;
         }
 
-        direction = throwDirection.normalized;
+        direction = throwDirection;
         traveled = 0f;
         bufferTimer = 0f;
         State = ThrowState.Out;
@@ -128,11 +131,12 @@ public class Shield : MonoBehaviour
 
     void UpdateHeld()
     {
-        // Nothing for now
+        GetComponent<Collider2D>().enabled = false;
     }
 
     void UpdateOut()
     {
+        GetComponent<Collider2D>().enabled = true;
         float t = 0f;
 
         if (maxDistance > 0f)
@@ -157,6 +161,7 @@ public class Shield : MonoBehaviour
 
     void UpdateHover()
     {
+        GetComponent<Collider2D>().enabled = true;
         hoverTimer -= Time.deltaTime;
         Spin(hoverSpin);
 
@@ -169,6 +174,7 @@ public class Shield : MonoBehaviour
 
     void UpdateReturning()
     {
+        GetComponent<Collider2D>().enabled = true;
         if (playerScript.gameObject == null)
         {
             Catch();
@@ -198,7 +204,8 @@ public class Shield : MonoBehaviour
 
     Vector2 GetAimDirection()
     {
-        return playerScript.normalizedDir;
+        Vector2 throwDirection = playerScript.mouseWorldPos - transform.position;
+        return throwDirection.normalized;
     }
 
     void Spin(float speed)
