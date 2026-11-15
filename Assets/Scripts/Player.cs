@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,16 +6,23 @@ public class Player : MonoBehaviour
 {
     public InputActionReference moveAction;
     public InputActionReference dashAction;
+    public InputActionReference throwAction;
 
     public Camera mainCam;
 
+    [Header("Normal Movement Stuff")]
     public float maxSpeed = 5f;
     public float acceleration = 40f;
     public float deceleration = 60f;
     public float speedMultiplier = 1f;
 
-    public float dashDuration;
-    public float dashSpeed;
+    [Header("Dash Stuff")]
+    public float dashDuration = 0.5f;
+    public float dashSpeed = 40f;
+    public float dashCooldown = 2f;
+
+    [Header("Throw Shield Stuff")]
+    // Things will go here
 
     public bool canMove = true;
     bool isDashing = false;
@@ -113,7 +118,7 @@ public class Player : MonoBehaviour
         rb.linearVelocity = normalizedDir * dashSpeed;
         yield return new WaitForSeconds(dashDuration);
         rb.linearVelocity = Vector2.zero;
-
+        yield return new WaitForSeconds(dashCooldown);
         isDashing = false;
     }
 
