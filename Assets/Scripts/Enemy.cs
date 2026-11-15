@@ -81,7 +81,7 @@ public class Enemy : MonoBehaviour
             if (collision.GetComponent<Projectile>().canDmgEnemy)
             {
                 TakeDamage(1);
-                Destroy(collision);
+                Destroy(collision.gameObject);
             }
         }
     }

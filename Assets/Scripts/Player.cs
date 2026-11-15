@@ -136,11 +136,8 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("Projectile"))
         {
-            if (collision.GetComponent<Projectile>().canDmgEnemy)
-            {
-                TakeDamage(10);
-                Destroy(collision);
-            }
+            TakeDamage(10);
+            Destroy(collision.gameObject);
         }
     }
 
