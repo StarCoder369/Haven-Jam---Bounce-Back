@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public TMP_Text scoreTxt;
+    public TMP_Text deathScoreTxt;
     public int score;
 
     int scoreToGet = 50;
@@ -163,5 +164,11 @@ public class GameManager : MonoBehaviour
         shieldActive = (shieldActive + 1) % shieldAmount;
 
         Debug.Log($"Active Shield: {shieldActive}, Shield Amount: {shieldAmount}");
+    }
+
+    public void DeathStuff()
+    {
+        deathScoreTxt.text = $"Score: {score}";
+        Time.timeScale = 0;
     }
 }

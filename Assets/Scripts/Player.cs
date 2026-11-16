@@ -39,6 +39,8 @@ public class Player : MonoBehaviour
     public Vector2 normalizedDir;
     public Vector3 mouseWorldPos;
 
+    public AudioSource hurtSound;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -137,6 +139,7 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("Projectile"))
         {
             TakeDamage(10);
+            hurtSound.Play();
             Destroy(collision.gameObject);
         }
     }

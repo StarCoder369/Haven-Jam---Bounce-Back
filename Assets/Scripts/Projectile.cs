@@ -19,8 +19,12 @@ public class Projectile : MonoBehaviour
     {
         if (collision.CompareTag("Shield"))
         {
-            rb.linearVelocity *= -1;
-            canDmgEnemy = true;
+            if (!canDmgEnemy)
+            {
+                rb.linearVelocity *= -1;
+                canDmgEnemy = true;
+
+            }
         }
     }
 }
