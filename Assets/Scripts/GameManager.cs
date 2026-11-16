@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public TMP_Text deathScoreTxt;
     public int score;
 
-    int scoreToGet = 50;
+    int scoreToGet = 30;
 
     public UpgradeChoose chooser;
     public Shield[] shield;
@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
         {
             ChooseUpgrades();
             float scoreFloat = scoreToGet;
-            scoreToGet = (int)(scoreFloat * 1.25f);
+            scoreToGet = (int)(scoreFloat * 2f);
         }
     }
 
@@ -169,6 +169,7 @@ public class GameManager : MonoBehaviour
 
     public void DeathStuff()
     {
+        deathPanel.SetActive(true);
         deathScoreTxt.text = $"Score: {score}";
         Time.timeScale = 0;
     }

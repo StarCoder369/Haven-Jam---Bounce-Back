@@ -140,15 +140,17 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("Projectile") && !dead)
         {
-            TakeDamage(10);
-            hurtSound.Play();
+            if (hurtSound != null)
+            {
+                hurtSound.Play();
+            }
+            TakeDamage(5);
             Destroy(collision.gameObject);
         }
     }
 
     public void TakeDamage(float dmg)
     {
-        dead = true;
         currentHealth -= dmg;
         if (currentHealth <= 0)
         {
@@ -160,6 +162,7 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
+        dead = true;
         Destroy(gameObject);
     }
 }

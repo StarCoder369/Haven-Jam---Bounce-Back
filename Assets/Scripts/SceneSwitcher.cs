@@ -1,10 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneManager : MonoBehaviour
+public class SceneSwitcher : MonoBehaviour
 {
-
-    public static SceneManager Instance { get; private set; }
+    public static SceneSwitcher Instance { get; private set; }
 
     private void Awake()
     {
@@ -16,8 +15,8 @@ public class SceneManager : MonoBehaviour
 
         Instance = this;
     }
-    public void LoadScene(string scene)
+    public void LoadSceneWithName(string scene)
     {
-        LoadScene(scene);
+        SceneManager.LoadScene(scene);
     }
 }

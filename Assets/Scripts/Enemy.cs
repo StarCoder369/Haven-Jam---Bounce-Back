@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -22,12 +23,17 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    public Canvas healthCanvas;
+
+    public Slider healthBar;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
         rb.freezeRotation = true;
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+        healthCanvas.worldCamera = Camera.main;
     }
 
     private void Start()
@@ -66,6 +72,8 @@ public class Enemy : MonoBehaviour
         }
 
         rb.linearVelocity = Vector2.MoveTowards(rb.linearVelocity, desired, acceleration * Time.fixedDeltaTime);
+
+        healthBar.value = currentHealth / maxHealth;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
