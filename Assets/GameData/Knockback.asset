@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 584ebeda9eb114fe9a10c60f27cb927a, type: 3}
   m_Name: Knockback
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeOption
-  upgradeName: Quick Reload
-  subtitile: -0.1 Cooldown
-  upgradeType: 3
-  upgradeSymbol: 1
-  increaseAmt: 0.1
+  title: Heavy Shield
+  subtitle: +2 Knockback
+  upgradeType: 2
+  upgradeSymbol: 0
+  increaseAmt: 2

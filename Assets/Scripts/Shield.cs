@@ -1,6 +1,5 @@
+
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.InputSystem;
 
 public enum ThrowState
 {
@@ -12,7 +11,6 @@ public enum ThrowState
 
 public class Shield : MonoBehaviour
 {
-    public InputActionReference throwAction;
     public Player playerScript;
     public Orbit orbitScript;
 
@@ -43,29 +41,12 @@ public class Shield : MonoBehaviour
     float returnSpeed;
     float bufferTimer;
 
-    void OnEnable()
-    {
-        if (throwAction != null)
-        {
-            throwAction.action.Enable();
-            throwAction.action.performed += Throw;
-        }
-    }
-
-    void OnDisable()
-    {
-        if (throwAction != null)
-        {
-            throwAction.action.Disable();
-            throwAction.action.performed -= Throw;
-        }
-    }
-
-    public void Throw(InputAction.CallbackContext context)
+    public void HandleThrowInput()
     {
         if (State == ThrowState.Held)
         {
             Throw(GetAimDirection());
+            GameManager.Instance.ChangeActiveShield();
         }
         else
         {
@@ -79,9 +60,10 @@ public class Shield : MonoBehaviour
         {
             bufferTimer -= Time.deltaTime;
 
-            if (State == ThrowState.Held)
+            if (State == ThrowState.Held && GameManager.Instance.shield[GameManager.Instance.shieldActive] == this)
             {
                 Throw(GetAimDirection());
+                GameManager.Instance.ChangeActiveShield();
             }
         }
 
@@ -137,6 +119,7 @@ public class Shield : MonoBehaviour
     void UpdateOut()
     {
         GetComponent<Collider2D>().enabled = true;
+
         float t = 0f;
 
         if (maxDistance > 0f)
@@ -150,6 +133,7 @@ public class Shield : MonoBehaviour
 
         transform.position += (Vector3)(direction * step);
         traveled += step;
+
         Spin(throwSpin);
 
         if (traveled >= maxDistance - 0.0001f)
@@ -162,6 +146,7 @@ public class Shield : MonoBehaviour
     void UpdateHover()
     {
         GetComponent<Collider2D>().enabled = true;
+
         hoverTimer -= Time.deltaTime;
         Spin(hoverSpin);
 
@@ -175,7 +160,8 @@ public class Shield : MonoBehaviour
     void UpdateReturning()
     {
         GetComponent<Collider2D>().enabled = true;
-        if (playerScript.gameObject == null)
+
+        if (playerScript == null)
         {
             Catch();
             return;
@@ -194,6 +180,7 @@ public class Shield : MonoBehaviour
 
         float step = Mathf.Min(returnSpeed * Time.deltaTime, distance);
         transform.position += (Vector3)(toOwner.normalized * step);
+
         Spin(returnSpin);
     }
 

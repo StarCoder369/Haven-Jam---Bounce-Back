@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 584ebeda9eb114fe9a10c60f27cb927a, type: 3}
   m_Name: Speedy
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeOption
-  upgradeName: Speedy
-  subtitile: +1 Speed
+  title: Speedy Shield
+  subtitle: +3 Speed
   upgradeType: 1
   upgradeSymbol: 0
-  increaseAmt: 1
+  increaseAmt: 3

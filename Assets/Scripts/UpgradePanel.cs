@@ -1,16 +1,17 @@
+using TMPro;
 using UnityEngine;
 
 public class UpgradePanel : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public UpgradeOption option;
 
-    // Update is called once per frame
-    void Update()
+    public TMP_Text titleTxt;
+
+    public TMP_Text subtitleTxt;
+
+    public void UpdateText()
     {
-        
+        titleTxt.text = option.title;
+        subtitleTxt.text = option.subtitle;
     }
 }

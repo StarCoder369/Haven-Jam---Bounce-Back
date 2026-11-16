@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 584ebeda9eb114fe9a10c60f27cb927a, type: 3}
   m_Name: AnotherShield
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeOption
-  upgradeName: New Shield
-  subtitile: +1 Shield (8 Max)
-  upgradeType: 4
+  title: New Shield
+  subtitle: '+1 Shield (Max: 5)'
+  upgradeType: 3
   upgradeSymbol: 0
   increaseAmt: 1

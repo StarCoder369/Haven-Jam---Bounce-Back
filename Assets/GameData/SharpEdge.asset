@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 584ebeda9eb114fe9a10c60f27cb927a, type: 3}
   m_Name: SharpEdge
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeOption
-  upgradeName: Sharp Edge
-  subtitile: +1 Dmg
+  title: Sharp Edge
+  subtitle: +1 Dmg
   upgradeType: 0
   upgradeSymbol: 0
   increaseAmt: 1

@@ -3,8 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewUpgradeOption", menuName = "Game Data/Upgrade Option")]
 public class UpgradeOption : ScriptableObject
 {
-    public string upgradeName;
-    public string subtitile;
+    public string title;
+    public string subtitle;
 
     [System.Serializable]
     public enum UpgradeOptions
@@ -12,7 +12,6 @@ public class UpgradeOption : ScriptableObject
         Damage,
         Speed,
         Knockback,
-        Cooldown,
         ShieldAmt
     }
 

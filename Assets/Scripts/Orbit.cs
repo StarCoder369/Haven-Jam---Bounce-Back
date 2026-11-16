@@ -11,13 +11,22 @@ public class Orbit : MonoBehaviour
     public bool clockwise = false;
     public float selfSpin = 0f;
 
+    public Orbit parentOrbiter;
+
     public Vector2 position;
 
     private float angle;
 
     private void Start()
     {
-        angle = startAngle;
+        if (parentOrbiter != null)
+        {
+            angle = parentOrbiter.angle + startAngle;
+        }
+        else
+        {
+            angle = startAngle;
+        }
     }
 
     private void LateUpdate()
