@@ -41,6 +41,8 @@ public class Player : MonoBehaviour
 
     public AudioSource hurtSound;
 
+    bool dead = false;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -136,7 +138,7 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Projectile"))
+        if (collision.CompareTag("Projectile") && !dead)
         {
             TakeDamage(10);
             hurtSound.Play();
@@ -146,9 +148,12 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
+        dead = true;
         currentHealth -= dmg;
         if (currentHealth <= 0)
         {
+            healthTxt.text = $"{currentHealth}/{maxHealth}";
+            GameManager.Instance.DeathStuff();
             Die();
         }
     }

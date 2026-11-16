@@ -1569,7 +1569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &510102141
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4336,7 +4336,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3939256d88b774b0bbc57016ec4ece35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  deathPanel: {fileID: 510102140}
   scoreTxt: {fileID: 1457870555}
+  deathScoreTxt: {fileID: 1219454539}
   score: 0
   chooser: {fileID: 122240133}
   shield:

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    public GameObject deathPanel;
     public TMP_Text scoreTxt;
     public TMP_Text deathScoreTxt;
     public int score;
